@@ -17,8 +17,8 @@ jobs:
           java-version: 11
       - name: Run backend test
         run: |
-          chmod +x mvnw &
-           run ci:backend:test
+          chmod +x mvnw
+          ./mvnw ci:backend:test
       - name: Package application
         run: run java:jar:prod
       - name: Build and publish docker image
