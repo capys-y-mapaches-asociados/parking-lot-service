@@ -20,7 +20,7 @@ jobs:
           chmod +x mvnw
           npm run ci:backend:test
       - name: Package application
-        run: run java:jar:prod
+        run: npm run java:jar:prod
       - name: Build and publish docker image
         if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/'))
         run: |
@@ -28,14 +28,14 @@ jobs:
           DOCKER_TAG=${GIT_TAG#:refs/heads/main}
           ./mvnw -ntp jib:build -Djib.to.image=jhipster/parking-lot${DOCKER_TAG} -Djib.to.auth.username="${{ secrets.DOCKER_USERNAME }}" -Djib.to.auth.password="${{ secrets.DOCKER_PASSWORD }}" -Pprod
       - name: 'E2E: Package'
-        run: run ci:e2e:package
+        run: npm run ci:e2e:package
       - name: 'E2E: Prepare'
-        run: run ci:e2e:prepare
+        run: npm run ci:e2e:prepare
       - name: 'E2E: Run'
-        run: run ci:e2e:run
+        run: npm run ci:e2e:run
         env:
           CYPRESS_ENABLE_RECORD: true
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
       - name: 'E2E: Teardown'
-        run: run ci:e2e:teardown
+        run: npm run ci:e2e:teardown
