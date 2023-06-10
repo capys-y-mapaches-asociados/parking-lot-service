@@ -17,7 +17,7 @@ jobs:
           java-version: 11
       - name: Run backend test
         run: |
-          chmod +x mvnw
+          chmod +x mvnw &
            run ci:backend:test
       - name: Package application
         run: run java:jar:prod
