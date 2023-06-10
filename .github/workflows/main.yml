@@ -18,7 +18,7 @@ jobs:
       - name: Run backend test
         run: |
           chmod +x mvnw
-          npm run ci:backend:test
+           run ci:backend:test
       - name: Package application
         run: run java:jar:prod
       - name: 'E2E: Package'
@@ -28,7 +28,7 @@ jobs:
       - name: 'E2E: Run'
         run: run ci:e2e:run
         env:
-          CYPRESS_ENABLE_RECORD: false
+          CYPRESS_ENABLE_RECORD: true
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
       - name: 'E2E: Teardown'
